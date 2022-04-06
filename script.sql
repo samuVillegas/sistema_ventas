@@ -1,3 +1,11 @@
+/*----------------DDL-------------------------*/
+SHOW DATABASES; /*Mostrar las bases de datos*/
+CREATE DATABASE sistema_ventas; /*Crear base de datos*/
+USE sistema_ventas; /*Seleccionar base de datos*/
+/*Motor de almacenamiento MyISAM, InnoDB ( ENGINE=MYISAM;)*/
+
+DROP TABLE IF EXISTS sedes; 
+
 CREATE TABLE sedes (
     id INT UNSIGNED AUTO_INCREMENT, 
     nombre VARCHAR(200) NOT NULL,
@@ -10,29 +18,9 @@ CREATE TABLE sedes (
     CONSTRAINT `pk_id_sedes` PRIMARY KEY(id) 
 ); 
 
-/*INSERT*/
-
-INSERT INTO sedes (calle,nombre,carrera,nomenclatura,ciudad)
-VALUES ('Natura sede Medellín 323232342342424242','Calle 3','Carrera 3','NSD3','Medellín'),
-('Natura sede Medellín 1','Calle 2','Carrera 2','NSD2','Medellín');
-
-/*DELETE*/
-DELETE FROM sedes WHERE nombre='Calle 3' OR nombre= 'Calle 2';
-DELETE FROM sedes;
-DELETE FROM sedes WHERE nombre='Calle 3' AND nomenclatura= 'NSD3';
-
-
-/*UPDATE*/
-
-UPDATE sedes 
-SET nombre = 'Natura sede bogota', calle = 'Calle 70', ciudad = 'Bogota', barrio = 'Kenedy', descripcion = 'Buena sede'
-WHERE id = 7;
-
-/*SELECT*/
-SELECT * FROM sedes;
-
-
 ALTER TABLE sedes ADD CONSTRAINT `uq_nombre_sedes` UNIQUE(nombre);
+
+DROP TABLE IF EXISTS productos; 
 
 CREATE TABLE productos (
     id INT UNSIGNED AUTO_INCREMENT, 
@@ -49,6 +37,23 @@ CREATE TABLE productos (
 );
 
 ALTER TABLE productos ADD CONSTRAINT `uq_nombre_productos` UNIQUE(nombre);
+
+DROP TABLE IF EXISTS usuarios; 
+
+CREATE TABLE usuarios (
+    id INT UNSIGNED AUTO_INCREMENT, 
+    documento VARCHAR(100) NOT NULL,
+    nombre VARCHAR(200) NOT NULL, 
+    apellido VARCHAR(100) NOT NULL,
+    sexo ENUM('Femenino', 'Masculino'), 
+    tipo_documento ENUM('CC','CE','TI') NOT NULL, 
+    fecha_nacimiento DATE, 
+    nacionalidad ENUM('Colombiano', 'Venezolanos', 'Colombo-Venzolano'), 
+    fecha_creacion TIMESTAMP NOT NULL, 
+    CONSTRAINT `pk_id_usuarios` PRIMARY KEY(id) 
+);
+
+DROP TABLE IF EXISTS ventas; 
 
 CREATE TABLE ventas ( 
     id INT UNSIGNED AUTO_INCREMENT, 
