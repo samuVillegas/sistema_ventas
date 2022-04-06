@@ -14,7 +14,7 @@ app.get('', (req,res)=>{
 app.use('/api/', require('./routes/productos'))
 app.use('/api/', require('./routes/sedes'))
 
-app.set("port", process.env.port);
+app.set("port", process.env.PORT);
 app.listen(app.get("port"), () => {
   console.log(`Servidor corriendo en el puerto ${app.get("port")}`);
 });
