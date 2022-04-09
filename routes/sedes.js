@@ -15,20 +15,21 @@ router.get('/sedes', async (req, res) => {
 router.post('/sedes', async (req, res) => {
     try {
         //Forma 1
-        const { nombre } = req.body;
+        //const { nombre } = req.body;
+        console.log(req.body)
         // await connection.query(`
         //     INSERT INTO sedes (nombre,calle,carrera,nomenclatura,barrio,ciudad,descripcion)
         //     VALUES ('${nombre}','${calle}','${carrera}','${nomenclatura}','${barrio}','${ciudad}','${descripcion}');
         // `)
 
         //Forma 2
-        await connection.query(`
-            INSERT INTO sedes (${Object.keys(req.body).join()})
-            VALUES (?,?,?,?,?,?,?);
-        `, Object.values(req.body));
+        // await connection.query(`
+        //     INSERT INTO sedes (${Object.keys(req.body).join()})
+        //     VALUES (?,?,?,?,?,?,?);
+        // `, Object.values(req.body));
 
-        const [rows] = await connection.query(`SELECT * FROM sedes WHERE nombre='${nombre}';`);
-        return res.status(200).json(rows);
+        // const [rows] = await connection.query(`SELECT * FROM sedes WHERE nombre='${nombre}';`);
+        return res.status(200).json(req.body);
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: "Internal server error" });
